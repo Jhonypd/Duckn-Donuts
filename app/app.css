@@ -1,8 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* Duck'n Donuts palette */
+  --color-dn-caramel: #f4a635;
+  --color-dn-caramel-dark: #e6961f;
+  --color-dn-caramel-deep: #7a4a00;
+  --color-dn-cocoa: #3b2a14;
+  --color-dn-cocoa-dark: #4a3318;
+  --color-dn-cream: #fdf6e8;
+  --color-dn-cream-border: #fde8c5;
+  --color-dn-stone: #e8e4dc;
+  --color-dn-mocha: #7a6040;
+  --color-dn-rose: #fde8f3;
+  --color-dn-rose-strong: #b5496a;
+  --color-dn-mist: #aeaaa2;
 }
 
 html,
@@ -12,4 +27,8 @@ body {
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+}
+
+body.sacola-open {
+  overflow: hidden;
 }
