@@ -1,12 +1,16 @@
-import type { Produto } from "../types.index";
+import type { ProdutoDisplay } from "../types.index";
 
 interface ImageModalProps {
-  product: Produto | null;
+  product: ProdutoDisplay | null;
   onClose: () => void;
 }
 
 export function ModalImagem({ product, onClose }: ImageModalProps) {
   if (!product) return null;
+
+  const imageSrc =
+    product.image ||
+    "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&q=80";
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -25,26 +29,26 @@ export function ModalImagem({ product, onClose }: ImageModalProps) {
       >
         {/* Imagem */}
         <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-60 object-cover bg-[#FDF6E8]"
+          src={imageSrc}
+          alt={product.nome}
+          className="w-full h-60 object-cover bg-dn-cream"
         />
 
         {/* Informações */}
         <div className="p-4 pb-5 px-4.5">
           <h2
-            className="text-[22px] font-bold text-[#3B2A14] mb-1.5"
+            className="text-[22px] font-bold text-dn-cocoa mb-1.5"
             style={{ fontFamily: "Fredoka, sans-serif" }}
           >
-            {product.name}
+            {product.nome}
           </h2>
-          <p className="text-[13px] text-[#7A6040] leading-relaxed mb-3.5">
-            {product.description}
+          <p className="text-[13px] text-dn-mocha leading-relaxed mb-3.5">
+            {product.descricao || "Sem descrição disponível"}
           </p>
           <div className="flex items-center justify-between">
             <button
               onClick={onClose}
-              className="bg-[#FDF6E8] border-none rounded-lg px-4 py-2 text-[13px] font-bold text-[#7A6040] cursor-pointer hover:bg-[#E8E4DC] transition-colors"
+              className="bg-dn-cream border-none rounded-lg px-4 py-2 text-[13px] font-bold text-dn-mocha cursor-pointer hover:bg-dn-stone transition-colors"
               style={{ fontFamily: "Nunito, sans-serif" }}
             >
               Fechar

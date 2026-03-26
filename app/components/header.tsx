@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <header className="bg-[#F4A635] shadow-lg sticky top-0 z-50 w-full flex items-center justify-center">
+    <header className="bg-dn-caramel shadow-lg sticky top-0 z-50 w-full flex items-center justify-center">
       <div className="max-w-120 mx-auto px-5 py-4.5 pb-3.5">
         <div className="flex items-center gap-3">
           {/* Logo */}
@@ -15,7 +15,7 @@ const Header = () => {
           {/* Nome */}
           <div>
             <h1
-              className="text-2xl font-bold text-[#3B2A14] leading-none"
+              className="text-2xl font-bold text-dn-cocoa leading-none"
               style={{ fontFamily: "Fredoka, sans-serif" }}
             >
               Duck'n Donuts

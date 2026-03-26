@@ -1,13 +1,13 @@
 import ZoomInOutlinedIcon from "@mui/icons-material/ZoomInOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import type { Produto } from "../types.index";
+import type { ProdutoDisplay } from "../types.index";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 
 interface ProductCardProps {
-  product: Produto;
+  product: ProdutoDisplay;
   quantity: number;
-  onQuantityChange: (productId: string, quantity: number) => void;
-  onImageClick: (product: Produto) => void;
+  onQuantityChange: (productId: number, quantity: number) => void;
+  onImageClick: (product: ProdutoDisplay) => void;
 }
 
 export function CardProduto({
@@ -26,74 +26,79 @@ export function CardProduto({
     }
   };
 
+  // Placeholder image if not provided
+  const imageSrc =
+    product.image ||
+    "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&q=80";
+
   return (
-    <div className="bg-white rounded-2xl shadow-[0_2px_12px_rgba(59,42,20,0.10)] border border-[#FDE8C5] flex items-stretch gap-0 mb-3.5 overflow-hidden transition-all duration-150 hover:translate-y-0.5 hover:shadow-[0_6px_20px_rgba(59,42,20,0.13)]">
+    <div className="border-dn-cream-border mb-3.5 flex items-stretch gap-0 overflow-hidden rounded-xl border bg-white shadow-[0_2px_12px_rgba(59,42,20,0.10)] transition-all duration-150 hover:translate-y-0.5 hover:shadow-[0_6px_20px_rgba(59,42,20,0.13)]">
       {/* Imagem */}
       <div
-        className="w-27 min-w-27 relative overflow-hidden bg-[#FDF6E8] cursor-pointer group"
+        className="bg-dn-cream group relative w-27 min-w-27 cursor-pointer overflow-hidden"
         onClick={() => onImageClick(product)}
       >
         <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          src={imageSrc}
+          alt={product.nome}
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <div className="absolute bottom-1.5 right-1.5 bg-white/50 rounded-md w-5.5 h-5.5 flex items-center justify-center pointer-events-none">
-          <ZoomInOutlinedIcon className="w-3 h-3 text-[#3B2A14]" />
+        <div className="pointer-events-none absolute right-1.5 bottom-1.5 flex h-5.5 w-5.5 items-center justify-center rounded-md bg-white/50">
+          <ZoomInOutlinedIcon className="text-dn-cocoa h-3 w-3" />
         </div>
       </div>
 
       {/* Conteúdo */}
-      <div className="flex-1 p-3 pb-2.5 flex flex-col justify-between gap-1.5">
+      <div className="flex flex-1 flex-col justify-between gap-1.5 p-3 pb-2.5">
         <div>
           {product.badge && (
-            <div className="inline-block bg-[#FDE8F3] text-[#b5496a] text-[10px] font-bold px-1.5 py-0.5 rounded-full mb-1">
+            <div className="bg-dn-rose text-dn-rose-strong mb-1 inline-block rounded-full px-1.5 py-0.5 text-[10px] font-bold">
               {product.badge}
             </div>
           )}
           <h3
-            className="text-base font-semibold text-[#3B2A14] leading-tight mb-0.5"
+            className="text-dn-cocoa mb-0.5 text-base leading-tight font-semibold"
             style={{ fontFamily: "Fredoka, sans-serif" }}
           >
-            {product.name}
+            {product.nome}
           </h3>
-          <p className="text-[11.5px] text-[#7A6040] leading-relaxed line-clamp-2">
-            {product.description}
+          <p className="text-dn-mocha line-clamp-2 text-[11.5px] leading-relaxed">
+            {product.descricao || "Sem descrição disponível"}
           </p>
         </div>
 
         {/* Preço e Controles */}
-        <div className="flex items-center justify-between gap-2 mt-1">
+        <div className="mt-1 flex items-center justify-between gap-2">
           <div
-            className="text-lg font-bold text-[#7A4A00]"
+            className="text-dn-caramel-deep text-lg font-bold"
             style={{ fontFamily: "Fredoka, sans-serif" }}
           >
-            R$ {product.price.toFixed(2).replace(".", ",")}
+            R$ {product.preco.toFixed(2).replace(".", ",")}
           </div>
 
           {/* Seletor de Quantidade */}
-          <div className="flex items-center gap-1.5 bg-[#FDF6E8] rounded-full px-1 py-0.5 border border-[#FDE8C5]">
+          <div className="bg-dn-cream border-dn-cream-border flex items-center gap-1.5 rounded-full border px-1 py-0.5">
             <button
               onClick={handleDecrement}
-              className={`w-7 h-7 rounded-full border-none cursor-pointer flex items-center justify-center transition-all active:scale-90 ${
+              className={`flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-none transition-all active:scale-90 ${
                 quantity > 0
-                  ? "bg-[#FDE8C5] text-[#7A4A00]"
-                  : "bg-[#E8E4DC] text-[#7A6040]"
+                  ? "bg-dn-cream-border text-dn-caramel-deep"
+                  : "bg-dn-stone text-dn-mocha"
               }`}
             >
-              <RemoveOutlinedIcon className="w-4 h-4" strokeWidth={3} />
+              <RemoveOutlinedIcon className="h-4 w-4" strokeWidth={3} />
             </button>
             <div
-              className="min-w-4.5 text-center text-base font-semibold text-[#3B2A14]"
+              className="text-dn-cocoa min-w-4.5 text-center text-base font-semibold"
               style={{ fontFamily: "Fredoka, sans-serif" }}
             >
               {quantity}
             </div>
             <button
               onClick={handleIncrement}
-              className="w-7 h-7 rounded-full border-none cursor-pointer bg-[#F4A635] text-[#7A4A00] flex items-center justify-center transition-all active:scale-90"
+              className="bg-dn-caramel text-dn-caramel-deep flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-none transition-all active:scale-90"
             >
-              <AddOutlinedIcon className="w-4 h-4" strokeWidth={3} />
+              <AddOutlinedIcon className="h-4 w-4" strokeWidth={3} />
             </button>
           </div>
         </div>
