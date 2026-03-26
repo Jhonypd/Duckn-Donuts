@@ -1,4 +1,12 @@
 // API Types based on PHP API
+export enum CategoriaProdutos {
+  NOVIDADES = 0,
+  RECHEADOS = 1,
+  NORMAIS = 2,
+  GOURMES = 3,
+  PROMOCOES = 4,
+}
+
 export interface Produto {
   id: number;
   nome: string;
@@ -6,6 +14,7 @@ export interface Produto {
   descricao?: string;
   preco: number;
   inativo: 0 | 1;
+  categoria?: CategoriaProdutos;
 }
 
 // Local display types (can extend Produto if needed)

@@ -1,11 +1,17 @@
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { useEffect } from "react";
 import type { CartItem } from "../types.index";
 
 interface CartDrawerProps {
   isOpen: boolean;
   onClose: () => void;
+  onQuantityChange: (productId: number, quantity: number) => void;
+  onClear: () => void;
+  onFinalizar: () => void;
   items: CartItem[];
   totalPrice: number;
 }
@@ -13,6 +19,9 @@ interface CartDrawerProps {
 export function SacolaDrawer({
   isOpen,
   onClose,
+  onQuantityChange,
+  onClear,
+  onFinalizar,
   items,
   totalPrice,
 }: CartDrawerProps) {
@@ -29,10 +38,6 @@ export function SacolaDrawer({
   const placeholderImage =
     "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&q=80";
 
-  const handleFinalize = () => {
-    alert("Finalizando pedido! 🐥");
-  };
-
   return (
     <>
       {/* Overlay */}
@@ -47,25 +52,29 @@ export function SacolaDrawer({
             >
               <ShoppingBagIcon /> Minha sacola
             </h2>
-            <button
-              type="button"
-              onClick={onClose}
-              className="bg-dn-cream text-dn-mocha hover:bg-dn-stone flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-none transition-colors"
-            >
-              <CloseIcon className="h-4.5 w-4.5" />
-            </button>
+            <div className="flex items-center gap-2">
+              {items.length > 0 && (
+                <button
+                  type="button"
+                  onClick={onClear}
+                  className="text-dn-mocha hover:text-dn-cocoa cursor-pointer border-none bg-transparent text-xs font-semibold underline decoration-dotted underline-offset-2"
+                >
+                  Limpar
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={onClose}
+                className="bg-dn-cream text-dn-mocha hover:bg-dn-stone flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-none transition-colors"
+              >
+                <CloseIcon className="h-4.5 w-4.5" />
+              </button>
+            </div>
           </div>
 
           {/* Items */}
           {items.length === 0 ? (
-            <div
-              className="text-dn-mist py-8 text-center text-sm"
-              style={{
-                backgroundImage: `<ShoppingBagIcon />`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-              }}
-            >
+            <div className="text-dn-mist py-8 text-center text-sm">
               🐥 Sua sacola está vazia.
               <br />
               Adicione um donut!
@@ -93,6 +102,42 @@ export function SacolaDrawer({
                       <div className="text-dn-mist mt-0.5 text-xs">
                         {item.quantity}x · R${" "}
                         {item.preco.toFixed(2).replace(".", ",")} cada
+                      </div>
+                      <div className="mt-2 flex items-center gap-2">
+                        <button
+                          onClick={() =>
+                            onQuantityChange(item.id, item.quantity - 1)
+                          }
+                          className={`flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-none transition-all active:scale-90 ${
+                            item.quantity > 1
+                              ? "bg-dn-cream-border text-dn-caramel-deep"
+                              : "bg-dn-stone text-dn-mocha"
+                          }`}
+                          title={
+                            item.quantity > 1 ? "Diminuir" : "Remover item"
+                          }
+                        >
+                          {item.quantity > 1 ? (
+                            <RemoveOutlinedIcon className="h-4 w-4" />
+                          ) : (
+                            <DeleteOutlineOutlinedIcon className="h-4 w-4" />
+                          )}
+                        </button>
+                        <div
+                          className="text-dn-cocoa min-w-4.5 text-center text-base font-semibold"
+                          style={{ fontFamily: "Fredoka, sans-serif" }}
+                        >
+                          {item.quantity}
+                        </div>
+                        <button
+                          onClick={() =>
+                            onQuantityChange(item.id, item.quantity + 1)
+                          }
+                          className="bg-dn-caramel text-dn-caramel-deep flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-none transition-all active:scale-90"
+                          title="Aumentar"
+                        >
+                          <AddOutlinedIcon className="h-4 w-4" />
+                        </button>
                       </div>
                     </div>
                     <div
@@ -126,7 +171,7 @@ export function SacolaDrawer({
 
               {/* Botão Finalizar */}
               <button
-                onClick={handleFinalize}
+                onClick={onFinalizar}
                 className="bg-dn-caramel text-dn-caramel-deep hover:bg-dn-caramel-dark mt-4 w-full cursor-pointer rounded-[10px] border-none py-3.5 text-[17px] font-bold transition-colors"
                 style={{ fontFamily: "Fredoka, sans-serif" }}
               >

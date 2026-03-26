@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "react-router";
 import { Provider } from "react-redux";
 
@@ -12,6 +13,7 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import Header from "./components/header";
 import { store } from "./store";
+import { CarrinhoProvider } from "./context/carrinho-contexto";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -31,22 +33,27 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  const hideHeader = location.pathname.startsWith("/pedido-revisao");
+
   return (
     <Provider store={store}>
-      <html lang="en">
-        <head>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <Meta />
-          <Links />
-        </head>
-        <body>
-          <Header />
-          {children}
-          <ScrollRestoration />
-          <Scripts />
-        </body>
-      </html>
+      <CarrinhoProvider>
+        <html lang="en">
+          <head>
+            <meta charSet="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <Meta />
+            <Links />
+          </head>
+          <body>
+            {!hideHeader && <Header />}
+            {children}
+            <ScrollRestoration />
+            <Scripts />
+          </body>
+        </html>
+      </CarrinhoProvider>
     </Provider>
   );
 }
