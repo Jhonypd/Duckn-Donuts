@@ -7,7 +7,7 @@ interface SacolaVaziaProps {
 export function SacolaVazia({ onVoltar }: SacolaVaziaProps) {
   return (
     <div
-      className="relative flex min-h-screen flex-col items-center justify-center bg-[#FFFDF7] p-6"
+      className="relative flex min-h-screen flex-col items-center justify-center bg-dn-cream p-6"
       style={{ fontFamily: "Nunito, sans-serif" }}
     >
       <ShoppingBagIcon
