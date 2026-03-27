@@ -92,7 +92,7 @@ export function SacolaDrawer({
                       alt={item.nome}
                       className="bg-dn-cream h-13 w-13 shrink-0 rounded-[10px] object-cover"
                     />
-                    <div className="flex-1">
+                    <div className="flex-1 flex-col sm:flex">
                       <div
                         className="text-dn-cocoa text-[15px] font-semibold"
                         style={{ fontFamily: "Fredoka, sans-serif" }}

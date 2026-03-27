@@ -12,14 +12,13 @@ export function RodapeConfirmacao({
   textoBotao,
 }: RodapeConfirmacaoProps) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-[#FFFDF7] border-t border-[#FDE8C5] px-4 py-3 pb-5 z-50 shadow-[0_-4px_20px_rgba(59,42,20,0.10)]">
-      <div className="max-w-[480px] mx-auto">
+    <div className="fixed right-0 bottom-0 left-0 z-50 border-t px-4 py-3 pb-5">
+      <div className="mx-auto max-w-120">
         <button
           onClick={onConfirmar}
-          className="w-full bg-[#3B2A14] text-white border-none rounded-[14px] px-5 py-4 flex items-center justify-between gap-3 cursor-pointer hover:bg-[#4a3318] active:scale-[0.99] transition-all"
+          className="hover:bg-dn-cocoa-dark bg-dn-cocoa flex w-full cursor-pointer items-center justify-between gap-3 rounded-2xl border-none px-5 py-2.5 text-white transition-all active:scale-[0.99]"
         >
           <div className="flex items-center gap-2.5">
-            <span className="text-xl">💬</span>
             <span
               className="text-[17px] font-bold"
               style={{ fontFamily: "Fredoka, sans-serif" }}
@@ -28,15 +27,12 @@ export function RodapeConfirmacao({
             </span>
           </div>
           <span
-            className="text-[17px] font-bold text-[#F4A635]"
+            className="text-dn-caramel text-[17px] font-bold"
             style={{ fontFamily: "Fredoka, sans-serif" }}
           >
             {formatPrice(total)}
           </span>
         </button>
-        <div className="text-center text-[11px] text-[#AEAAA2] font-semibold mt-2">
-          Voce sera redirecionado para o WhatsApp da loja
-        </div>
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
+import StoreIcon from "@mui/icons-material/Store";
 import type { TipoEntrega } from "./tipos";
 
 interface TipoEntregaProps {
@@ -7,11 +9,10 @@ interface TipoEntregaProps {
 
 export function TipoEntrega({ tipo, onChange }: TipoEntregaProps) {
   return (
-    <div className="bg-white rounded-2xl border border-[#FDE8C5] mt-4 overflow-hidden shadow-[0_2px_10px_rgba(59,42,20,0.07)]">
-      <div className="px-4 py-3.5 pb-3 border-b border-[#FDE8C5] flex items-center gap-2">
-        <span className="text-lg">📍</span>
+    <div className="border-dn-cream-border mt-4 overflow-hidden rounded-2xl border bg-white shadow-[0_2px_10px_rgba(59,42,20,0.07)]">
+      <div className="border-dn-cream-border flex items-center gap-2 border-b px-4 py-3.5 pb-3">
         <span
-          className="text-[17px] font-semibold text-[#3B2A14]"
+          className="text-dn-cocoa text-[17px] font-semibold"
           style={{ fontFamily: "Fredoka, sans-serif" }}
         >
           Como quer receber?
@@ -21,39 +22,39 @@ export function TipoEntrega({ tipo, onChange }: TipoEntregaProps) {
         <div className="flex gap-2.5">
           <div
             onClick={() => onChange("delivery")}
-            className={`flex-1 border-[1.5px] rounded-[10px] p-2.5 px-3 cursor-pointer transition-all ${
+            className={`h-full flex-1 cursor-pointer flex-col justify-between gap-4 rounded-[10px] border-[1.5px] p-2.5 px-3 transition-all ${
               tipo === "delivery"
-                ? "border-[#F4A635] bg-[#FDE8C5]"
-                : "border-[#FDE8C5] bg-[#FFFDF7] hover:border-[#F2C46D] hover:bg-[#FDE8C5]"
+                ? "border-dn-caramel bg-dn-cream-border"
+                : "hover:bg-dn-cream-border border-dn-cream-border bg-dn-stone hover:border-dn-caramel"
             }`}
           >
-            <div className="text-xl">🛵</div>
             <div
-              className="text-sm font-semibold text-[#3B2A14] mt-0.5"
+              className="text-dn-cocoa mt-0.5 flex items-center gap-3 text-sm font-semibold"
               style={{ fontFamily: "Fredoka, sans-serif" }}
             >
+              <DeliveryDiningIcon className="h-7! w-7!" />
               Entrega
             </div>
-            <div className="text-[11px] text-[#7A6040] font-semibold">
+            <div className="text-dn-cocoa text-[11px] font-semibold">
               ~35 min · R$ 5,00
             </div>
           </div>
           <div
             onClick={() => onChange("pickup")}
-            className={`flex-1 border-[1.5px] rounded-[10px] p-2.5 px-3 cursor-pointer transition-all ${
+            className={`h-full flex-1 cursor-pointer flex-col justify-between gap-4 rounded-[10px] border-[1.5px] p-2.5 px-3 transition-all ${
               tipo === "pickup"
-                ? "border-[#F4A635] bg-[#FDE8C5]"
-                : "border-[#FDE8C5] bg-[#FFFDF7] hover:border-[#F2C46D] hover:bg-[#FDE8C5]"
+                ? "border-dn-caramel bg-dn-cream-border"
+                : "hover:bg-dn-cream-border border-dn-cream-border bg-dn-stone hover:border-dn-caramel"
             }`}
           >
-            <div className="text-xl">🏪</div>
             <div
-              className="text-sm font-semibold text-[#3B2A14] mt-0.5"
+              className="text-dn-cocoa mt-0.5 text-sm font-semibold"
               style={{ fontFamily: "Fredoka, sans-serif" }}
             >
+              <StoreIcon className="h-7! w-7!" />
               Retirada
             </div>
-            <div className="text-[11px] text-[#7A6040] font-semibold">
+            <div className="text-dn-cocoa text-[11px] font-semibold">
               ~15 min · Gratis
             </div>
           </div>

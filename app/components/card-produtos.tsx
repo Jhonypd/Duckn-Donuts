@@ -35,7 +35,7 @@ export function CardProduto({
     <div className="border-dn-cream-border mb-3.5 flex items-stretch gap-0 overflow-hidden rounded-xl border bg-white shadow-[0_2px_12px_rgba(59,42,20,0.10)] transition-all duration-150 hover:translate-y-0.5 hover:shadow-[0_6px_20px_rgba(59,42,20,0.13)]">
       {/* Imagem */}
       <div
-        className="bg-dn-cream group relative w-27 min-w-27 cursor-pointer overflow-hidden"
+        className="bg-dn-cream group relative w-20 min-w-20 cursor-pointer overflow-hidden sm:w-27 sm:min-w-27"
         onClick={() => onImageClick(product)}
       >
         <img
@@ -44,7 +44,7 @@ export function CardProduto({
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <div className="pointer-events-none absolute right-1.5 bottom-1.5 flex h-5.5 w-5.5 items-center justify-center rounded-md bg-white/50">
-          <ZoomInOutlinedIcon className="text-dn-cocoa h-3 w-3" />
+          <ZoomInOutlinedIcon className="text-dn-cocoa h-4! w-4!" />
         </div>
       </div>
 
@@ -70,7 +70,7 @@ export function CardProduto({
         {/* Preço e Controles */}
         <div className="mt-1 flex items-center justify-between gap-2">
           <div
-            className="text-dn-caramel-deep text-lg font-bold"
+            className="text-dn-caramel-deep text-sm font-bold sm:text-lg"
             style={{ fontFamily: "Fredoka, sans-serif" }}
           >
             R$ {product.preco.toFixed(2).replace(".", ",")}
@@ -86,7 +86,10 @@ export function CardProduto({
                   : "bg-dn-stone text-dn-mocha"
               }`}
             >
-              <RemoveOutlinedIcon className="h-4 w-4" strokeWidth={3} />
+              <RemoveOutlinedIcon
+                className="h-3! w-3! sm:h-4! sm:w-4!"
+                strokeWidth={3}
+              />
             </button>
             <div
               className="text-dn-cocoa min-w-4.5 text-center text-base font-semibold"
@@ -98,7 +101,10 @@ export function CardProduto({
               onClick={handleIncrement}
               className="bg-dn-caramel text-dn-caramel-deep flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-none transition-all active:scale-90"
             >
-              <AddOutlinedIcon className="h-4 w-4" strokeWidth={3} />
+              <AddOutlinedIcon
+                className="h-3! w-3! sm:h-4! sm:w-4!"
+                strokeWidth={3}
+              />
             </button>
           </div>
         </div>

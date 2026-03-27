@@ -6,26 +6,26 @@ interface CabecalhoPedidoProps {
 
 export function CabecalhoPedido({ onVoltar }: CabecalhoPedidoProps) {
   return (
-    <div className="bg-[#F4A635] p-3.5 px-5 flex items-center gap-3 sticky top-0 z-50 shadow-[0_2px_12px_rgba(59,42,20,0.15)]">
+    <div className="bg-dn-caramel sticky top-0 z-50 flex items-center gap-3 p-3.5 px-5 shadow-[0_2px_12px_rgba(59,42,20,0.15)]">
       <button
         onClick={onVoltar}
-        className="w-9 h-9 bg-white/35 border-none rounded-[10px] flex items-center justify-center cursor-pointer hover:bg-white/55 transition-colors flex-shrink-0"
+        className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-[10px] border-none bg-white/35 transition-colors hover:bg-white/55"
         aria-label="Voltar"
       >
-        <ArrowBackIosNewIcon className="text-[#3B2A14] text-base" />
+        <ArrowBackIosNewIcon className="text-dn-cocoa h-6! w-6! text-base" />
       </button>
       <div className="flex-1">
         <h1
-          className="text-xl font-bold text-[#3B2A14] leading-none"
+          className="text-dn-cocoa text-xl leading-none font-bold"
           style={{ fontFamily: "Fredoka, sans-serif" }}
         >
           Confirmar Pedido
         </h1>
-        <div className="text-[11px] text-[#7A4A00] font-semibold mt-0.5">
+        <div className="text-dn-mocha mt-0.5 text-[11px] font-semibold">
           Revise os itens antes de enviar
         </div>
       </div>
-      <img src="/logo.webp" alt="Duck" className="w-6 h-6" />
+      <img src="/logo.webp" alt="Duck" className="h-8 w-8 rounded-full" />
     </div>
   );
 }

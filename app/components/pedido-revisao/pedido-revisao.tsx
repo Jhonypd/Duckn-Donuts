@@ -10,6 +10,7 @@ import { RodapeConfirmacao } from "./rodape-confirmacao";
 import { SacolaVazia } from "./sacola-vazia";
 import { TipoEntrega } from "./tipo-entrega";
 import type { ErrosCliente, TipoEntrega as TipoEntregaValue } from "./tipos";
+import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 
 interface PedidoRevisaoProps {
   itens: CartItem[];
@@ -23,13 +24,12 @@ export function PedidoRevisao({
   itens,
   onQuantidade,
   onVoltar,
-  whatsappLoja = "5547900000000",
+  whatsappLoja = "5547997145097",
   rotaSucesso = "/pedido-confirmado",
 }: PedidoRevisaoProps) {
   const navigate = useNavigate();
   const [etapa, setEtapa] = useState<1 | 2>(1);
-  const [tipoEntrega, setTipoEntrega] =
-    useState<TipoEntregaValue>("delivery");
+  const [tipoEntrega, setTipoEntrega] = useState<TipoEntregaValue>("pickup");
   const [nome, setNome] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [observacoes, setObservacoes] = useState("");
@@ -42,7 +42,7 @@ export function PedidoRevisao({
     (sum, item) => sum + item.preco * item.quantity,
     0,
   );
-  const taxaEntrega = tipoEntrega === "delivery" ? 5.0 : 0;
+  const taxaEntrega = tipoEntrega === "delivery" ? 10.0 : 0;
   const total = subtotal + taxaEntrega;
 
   const formatPrice = (value: number) => {
@@ -52,8 +52,7 @@ export function PedidoRevisao({
   const maskWhatsApp = (value: string) => {
     let v = value.replace(/\\D/g, "").slice(0, 11);
     if (v.length <= 2) v = v.replace(/^(\\d{0,2})/, "($1");
-    else if (v.length <= 7)
-      v = v.replace(/^(\\d{2})(\\d{0,5})/, "($1) $2");
+    else if (v.length <= 7) v = v.replace(/^(\\d{2})(\\d{0,5})/, "($1) $2");
     else v = v.replace(/^(\\d{2})(\\d{5})(\\d{0,4})/, "($1) $2-$3");
     return v;
   };
@@ -95,7 +94,9 @@ export function PedidoRevisao({
     message += `👤 *Cliente:* ${nome}\\n`;
     message += `📱 *WhatsApp:* ${whatsapp}\\n`;
     message += `🚀 *Tipo:* ${
-      tipoEntrega === "delivery" ? "Entrega 🛵" : "Retirada 🏪"
+      tipoEntrega === "delivery"
+        ? `Entrega <DeliveryDiningIcon />`
+        : "Retirada 🏪"
     }\\n\\n`;
     message += `*Itens:*\\n`;
 
@@ -151,13 +152,13 @@ export function PedidoRevisao({
 
   return (
     <div
-      className="min-h-screen bg-[#FFFDF7] pb-32"
+      className="bg-dn-cream-border min-h-screen pb-28"
       style={{ fontFamily: "Nunito, sans-serif" }}
     >
       <CabecalhoPedido onVoltar={handleVoltar} />
       <IndicadorEtapas etapa={etapa} />
 
-      <div className="max-w-[480px] mx-auto px-4">
+      <div className="mx-auto max-w-120 px-4">
         <CardItensPedido
           itens={itens}
           subtotal={subtotal}

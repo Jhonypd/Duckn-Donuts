@@ -5,7 +5,7 @@ import { ResumoPedido } from "./resumo-pedido";
 interface CardItensPedidoProps {
   itens: CartItem[];
   subtotal: number;
-  taxaEntrega: number;
+  taxaEntrega?: number;
   total: number;
   onEditar: () => void;
   onQuantidade: (productId: number, quantity: number) => void;
@@ -26,12 +26,11 @@ export function CardItensPedido({
   mostrarEditar = true,
 }: CardItensPedidoProps) {
   return (
-    <div className="bg-white rounded-2xl border border-[#FDE8C5] mt-4 overflow-hidden shadow-[0_2px_10px_rgba(59,42,20,0.07)]">
-      <div className="px-4 py-3.5 pb-3 border-b border-[#FDE8C5] flex items-center justify-between">
+    <div className="border-dn-cream-border mt-4 overflow-hidden rounded-2xl border bg-white shadow-[0_2px_10px_rgba(59,42,20,0.07)]">
+      <div className="border-dn-cream-border flex items-center justify-between border-b px-4 py-3.5 pb-3">
         <div className="flex items-center gap-2">
-          <span className="text-lg">🍩</span>
           <span
-            className="text-[17px] font-semibold text-[#3B2A14]"
+            className="text-dn-cocoa text-[17px] font-semibold"
             style={{ fontFamily: "Fredoka, sans-serif" }}
           >
             Itens do pedido
@@ -40,14 +39,14 @@ export function CardItensPedido({
         {mostrarEditar && (
           <button
             onClick={onEditar}
-            className="text-xs font-bold text-[#7A4A00] bg-[#FDE8C5] border-none rounded-md px-2.5 py-1 cursor-pointer hover:bg-[#F2C46D] transition-colors"
+            className="bg-dn-cream-border text-dn-cocoa hover:bg-dn-cream-border cursor-pointer rounded-md border-none px-2.5 py-1 text-xs font-bold transition-colors"
           >
             Editar
           </button>
         )}
       </div>
 
-      <div className="py-1">
+      <div className="h-52 overflow-y-auto py-1">
         {itens.map((item) => (
           <ItemPedido
             key={item.id}
