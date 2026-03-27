@@ -9,17 +9,17 @@ const getCirculoClasses = (etapaAtual: number, etapaIndicador: number) => {
   if (etapaAtual === etapaIndicador) {
     return "bg-dn-caramel text-dn-caramel-deep";
   }
-  return "bg-dn-caramel-dark text-white";
+  return "bg-dn-caramel-deep text-dn-cream";
 };
 
 const getTextoClasses = (etapaAtual: number, etapaIndicador: number) => {
   if (etapaAtual < etapaIndicador) return "text-dn-mist";
   if (etapaAtual === etapaIndicador) return "text-dn-caramel-deep";
-  return "text-dn-mocha";
+  return "text-dn-caramel-deep";
 };
 
 const getLinhaClasses = (ativa: boolean) =>
-  ativa ? "bg-dn-caramel-dark" : "bg-dn-stone";
+  ativa ? "bg-dn-caramel-deep" : "bg-dn-stone";
 
 export function IndicadorEtapas({ etapa }: IndicadorEtapasProps) {
   return (

@@ -8,6 +8,7 @@ import {
 export default [
   index("routes/home.tsx"),
   route("pedido-revisao", "routes/pedido-revisao.tsx"),
+  route("pedido-confirmado", "routes/pedido-confirmado.tsx"),
   // Catch-all route for unmatched paths
   route("*", "routes/not-found.tsx"),
 ] satisfies RouteConfig;
