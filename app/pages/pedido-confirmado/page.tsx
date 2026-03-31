@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -18,6 +18,12 @@ export default function PedidoConfirmadoPage() {
 
   const state = (location.state || null) as PedidoConfirmadoState | null;
 
+  useEffect(() => {
+    if (state) {
+      limpar();
+    }
+  }, [limpar, state]);
+
   const whatsappUrl = useMemo(() => {
     if (!state?.whatsappPhone || !state?.whatsappMessage) return "";
     const text = encodeURIComponent(state.whatsappMessage);
@@ -28,41 +34,37 @@ export default function PedidoConfirmadoPage() {
     navigate("/");
   };
 
-  const handleLimpar = () => {
-    limpar();
-  };
-
   return (
     <div
-      className="min-h-screen bg-dn-cream-border px-4 py-10"
+      className="bg-dn-cream-border min-h-screen px-4 py-10"
       style={{ fontFamily: "Nunito, sans-serif" }}
     >
       <div className="mx-auto max-w-120">
-        <div className="rounded-2xl border border-dn-cream-border bg-white px-6 py-7 shadow-[0_2px_12px_rgba(59,42,20,0.08)]">
+        <div className="border-dn-cream-border rounded-2xl border bg-white px-6 py-7 shadow-[0_2px_12px_rgba(59,42,20,0.08)]">
           <div className="flex flex-col items-center text-center">
             <CheckCircleRoundedIcon className="text-dn-caramel h-12! w-12!" />
             <h1
-              className="mt-3 text-[22px] font-bold text-dn-cocoa"
+              className="text-dn-cocoa mt-3 text-[22px] font-bold"
               style={{ fontFamily: "Fredoka, sans-serif" }}
             >
               Pedido confirmado
             </h1>
-            <p className="mt-1 text-sm font-semibold text-dn-mocha">
+            <p className="text-dn-mocha mt-1 text-sm font-semibold">
               {state?.customerName
                 ? `Obrigado, ${state.customerName}!`
                 : "Obrigado pelo seu pedido!"}
             </p>
             {state?.orderCode && (
-              <div className="mt-3 rounded-full bg-dn-cream px-3 py-1 text-xs font-bold text-dn-caramel-deep">
+              <div className="bg-dn-cream text-dn-caramel-deep mt-3 rounded-full px-3 py-1 text-xs font-bold">
                 Codigo do pedido: {state.orderCode}
               </div>
             )}
           </div>
 
           {!state && (
-            <div className="mt-5 rounded-xl border border-dn-cream-border bg-dn-cream px-4 py-3 text-center text-xs font-semibold text-dn-mocha">
-              Nao encontramos os dados do pedido. Volte ao catalogo para
-              iniciar um novo.
+            <div className="border-dn-cream-border bg-dn-cream text-dn-mocha mt-5 rounded-xl border px-4 py-3 text-center text-xs font-semibold">
+              Nao encontramos os dados do pedido. Volte ao catalogo para iniciar
+              um novo.
             </div>
           )}
 
@@ -72,8 +74,7 @@ export default function PedidoConfirmadoPage() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="hover:bg-dn-caramel-dark bg-dn-caramel flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold text-dn-caramel-deep transition-colors"
-                onClick={handleLimpar}
+                className="hover:bg-dn-caramel-dark bg-dn-caramel text-dn-caramel-deep flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold transition-colors"
               >
                 <WhatsAppIcon className="h-5! w-5!" />
                 Enviar pedido no WhatsApp

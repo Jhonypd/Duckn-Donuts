@@ -36,3 +36,44 @@ export interface ListarProdutosResponse {
   mensagem?: string;
   codigoHttp: number;
 }
+
+export interface AdminApiPedidoItem {
+  id: number;
+  produtoId: number;
+  produtoNome: string;
+  quantidade: number;
+  valorUnitario: number;
+}
+
+export interface AdminApiPedido {
+  id: number;
+  clienteNome: string;
+  clienteWhatsapp: string;
+  dataEntrega: string;
+  horaEntrega: string;
+  tipoEntrega: number;
+  endereco?: string | null;
+  formaPagamento: number;
+  status: number;
+  observacao?: string | null;
+  valorTotal: number;
+  createdAt: string;
+  updatedAt: string;
+  itens: AdminApiPedidoItem[];
+}
+
+export interface AdminApiPedidosResponse {
+  success: boolean;
+  resultado: {
+    pedidos: AdminApiPedido[];
+  };
+  mensagem?: string;
+  codigoHttp: number;
+}
+
+export type AdminOrderStatus =
+  | "novo"
+  | "preparo"
+  | "pronto"
+  | "entregue"
+  | "cancelado";

@@ -34,7 +34,9 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
-  const hideHeader = location.pathname.startsWith("/pedido-revisao");
+  const hideHeader =
+    location.pathname.startsWith("/pedido-revisao") ||
+    location.pathname.startsWith("/admin");
 
   return (
     <Provider store={store}>
@@ -42,7 +44,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <html lang="en">
           <head>
             <meta charSet="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
             <Meta />
             <Links />
           </head>

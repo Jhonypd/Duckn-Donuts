@@ -7,6 +7,7 @@ import {
 
 export default [
   index("routes/home.tsx"),
+  route("admin", "routes/admin.tsx"),
   route("pedido-revisao", "routes/pedido-revisao.tsx"),
   route("pedido-confirmado", "routes/pedido-confirmado.tsx"),
   // Catch-all route for unmatched paths
