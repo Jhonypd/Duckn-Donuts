@@ -11,9 +11,11 @@ export function ResumoPedido({
   total,
   formatPrice,
 }: ResumoPedidoProps) {
+  const entrega = taxaEntrega ?? 0;
+
   return (
     <div className="px-4 py-3">
-      {taxaEntrega && taxaEntrega > 0 && (
+      {entrega > 0 && (
         <div className="flex items-center justify-between py-1.5">
           <span className="text-dn-cocoa text-sm font-semibold">Subtotal</span>
           <span className="text-dn-cocoa text-sm font-bold">
@@ -22,13 +24,13 @@ export function ResumoPedido({
         </div>
       )}
 
-      {taxaEntrega && taxaEntrega > 0 && (
+      {entrega > 0 && (
         <div className="flex items-center justify-between py-1.5">
           <span className="text-dn-cocoa text-sm font-semibold">
             Taxa de entrega
           </span>
           <span className="text-dn-cocoa text-sm font-bold">
-            {taxaEntrega > 0 ? formatPrice(taxaEntrega) : "Gratis"}
+            {entrega > 0 ? formatPrice(entrega) : "Gratis"}
           </span>
         </div>
       )}

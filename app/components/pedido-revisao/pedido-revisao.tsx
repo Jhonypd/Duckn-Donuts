@@ -19,7 +19,6 @@ import { TipoEntrega } from "./tipo-entrega";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Input } from "../ui/input";
-import { Checkbox } from "../ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -27,7 +26,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Switch } from "../ui/switch";
 import {
   Popover,
   PopoverContent,
@@ -111,9 +109,6 @@ export function PedidoRevisao({
   const [dataEntrega, setDataEntrega] = useState(initialDate);
   const [horaEntrega, setHoraEntrega] = useState(initialTime);
   const [observacoes, setObservacoes] = useState("");
-  const [entregaSemContato, setEntregaSemContato] = useState(false);
-  const [semTalheres, setSemTalheres] = useState(false);
-  const [embalarPresente, setEmbalarPresente] = useState(false);
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [erroEnvio, setErroEnvio] = useState("");
   const [erros, setErros] = useState<ErrosCliente>({
@@ -152,18 +147,9 @@ export function PedidoRevisao({
   };
 
   const buildObservacaoFinal = () => {
-    const preferencias = [
-      semTalheres ? "Sem talheres" : null,
-      embalarPresente ? "Embalagem para presente" : null,
-      tipoEntrega === "delivery" && entregaSemContato
-        ? "Entrega sem contato"
-        : null,
-    ].filter(Boolean);
     const base = observacoes.trim();
-    if (!base && preferencias.length === 0) return undefined;
-    if (!base) return preferencias.join(" / ");
-    if (preferencias.length === 0) return base;
-    return `${base} | ${preferencias.join(" / ")}`;
+    if (!base) return undefined;
+    return base;
   };
 
   const handleWhatsAppChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -183,9 +169,6 @@ export function PedidoRevisao({
 
   const handleTipoEntregaChange = (value: TipoEntregaValue) => {
     setTipoEntrega(value);
-    if (value === "pickup") {
-      setEntregaSemContato(false);
-    }
   };
 
   const validarFormulario = () => {
@@ -603,48 +586,13 @@ export function PedidoRevisao({
                     </div>
 
                     <div className="border-dn-cream-border rounded-2xl border bg-dn-cream/70 p-3">
-                      <div className="flex items-center justify-between gap-3">
-                        <div>
-                          <p className="text-dn-cocoa text-sm font-semibold">
-                            Entrega sem contato
-                          </p>
-                          <p className="text-dn-mist text-xs font-medium">
-                            Deixaremos na portaria ou local combinado.
-                          </p>
-                        </div>
-                        <Switch
-                          checked={entregaSemContato}
-                          onCheckedChange={setEntregaSemContato}
-                          disabled={tipoEntrega !== "delivery"}
-                          className="data-checked:bg-dn-caramel data-checked:border-dn-caramel data-unchecked:bg-dn-cream-border/80"
-                        />
-                      </div>
-
-                      <div className="mt-3 grid gap-2">
-                        <label className="text-dn-cocoa flex items-start gap-2 text-sm font-semibold">
-                          <Checkbox
-                            checked={semTalheres}
-                            onCheckedChange={(value) =>
-                              setSemTalheres(value === true)
-                            }
-                            className="data-checked:bg-dn-caramel data-checked:border-dn-caramel text-dn-caramel-deep"
-                          />
-                          Sem talheres
-                        </label>
-                        <label className="text-dn-cocoa flex items-start gap-2 text-sm font-semibold">
-                          <Checkbox
-                            checked={embalarPresente}
-                            onCheckedChange={(value) =>
-                              setEmbalarPresente(value === true)
-                            }
-                            className="data-checked:bg-dn-caramel data-checked:border-dn-caramel text-dn-caramel-deep"
-                          />
-                          Embalagem para presente
-                        </label>
-                      </div>
-                      <div className="text-dn-mist mt-2 text-[11px] font-semibold">
-                        Preferencias adicionadas automaticamente nas observacoes.
-                      </div>
+                      <p className="text-dn-cocoa text-sm font-semibold">
+                        Preferências
+                      </p>
+                      <p className="text-dn-mist text-xs font-medium">
+                        Informe detalhes como portaria, alergias ou pedidos
+                        especiais no campo de observações.
+                      </p>
                     </div>
                   </div>
                 </TooltipProvider>

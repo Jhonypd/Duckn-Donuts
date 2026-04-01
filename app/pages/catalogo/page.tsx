@@ -46,10 +46,10 @@ const PLACEHOLDER_IMAGE =
 
 const CATEGORIAS = [
   { id: 0 as CategoriaProdutos, label: "Novidades" },
-  { id: 4 as CategoriaProdutos, label: "Promoções" },
   { id: 1 as CategoriaProdutos, label: "Recheados" },
   { id: 2 as CategoriaProdutos, label: "Normais" },
   { id: 3 as CategoriaProdutos, label: "Gourmés" },
+  { id: 4 as CategoriaProdutos, label: "Promoções" },
 ];
 
 const CatalogoPage = () => {
@@ -161,7 +161,7 @@ const CatalogoPage = () => {
 
   return (
     <div
-      className="bg-dn-cream relative min-h-screen pb-24"
+      className="bg-dn-cream relative min-h-screen overflow-x-hidden pb-24"
       style={{ fontFamily: "Nunito, sans-serif" }}
     >
       <div className="bg-dn-rose/40 pointer-events-none absolute -top-24 left-1/2 h-60 w-60 -translate-x-1/2 rounded-full blur-3xl" />
