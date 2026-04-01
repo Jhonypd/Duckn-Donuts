@@ -2,6 +2,7 @@ import ZoomInOutlinedIcon from "@mui/icons-material/ZoomInOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import type { ProdutoDisplay } from "../types.index";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
+import { Button } from "./ui/button";
 
 interface ProductCardProps {
   product: ProdutoDisplay;
@@ -78,7 +79,9 @@ export function CardProduto({
 
           {/* Seletor de Quantidade */}
           <div className="bg-dn-cream border-dn-cream-border flex items-center gap-1.5 rounded-full border px-1 py-0.5">
-            <button
+            <Button
+              type="button"
+              variant="ghost"
               onClick={handleDecrement}
               className={`flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-none transition-all active:scale-90 ${
                 quantity > 0
@@ -90,14 +93,16 @@ export function CardProduto({
                 className="h-3! w-3! sm:h-4! sm:w-4!"
                 strokeWidth={3}
               />
-            </button>
+            </Button>
             <div
               className="text-dn-cocoa min-w-4.5 text-center text-base font-semibold"
               style={{ fontFamily: "Fredoka, sans-serif" }}
             >
               {quantity}
             </div>
-            <button
+            <Button
+              type="button"
+              variant="ghost"
               onClick={handleIncrement}
               className="bg-dn-caramel text-dn-caramel-deep flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border-none transition-all active:scale-90"
             >
@@ -105,7 +110,7 @@ export function CardProduto({
                 className="h-3! w-3! sm:h-4! sm:w-4!"
                 strokeWidth={3}
               />
-            </button>
+            </Button>
           </div>
         </div>
       </div>

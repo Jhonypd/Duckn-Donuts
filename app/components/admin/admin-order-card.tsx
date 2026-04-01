@@ -1,5 +1,12 @@
 import { STATUS_META } from "./admin-types";
 import type { AdminOrder } from "./admin-types";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 type AdminOrderCardProps = {
   order: AdminOrder;
@@ -79,18 +86,22 @@ export const AdminOrderCard = ({
           Alterar
         </button>
 
-        <select
-          className="admin-order-status-select"
+        <Select
           value={order.status}
-          onChange={(event) =>
-            onChangeStatus(order.id, event.target.value as AdminOrder["status"])
+          onValueChange={(value) =>
+            onChangeStatus(order.id, value as AdminOrder["status"])
           }
         >
-          <option value="novo">Novo</option>
-          <option value="preparo">Em preparo</option>
-          <option value="pronto">Pronto</option>
-          <option value="entregue">Entregue</option>
-        </select>
+          <SelectTrigger className="admin-order-status-select w-35">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="novo">Novo</SelectItem>
+            <SelectItem value="preparo">Em preparo</SelectItem>
+            <SelectItem value="pronto">Pronto</SelectItem>
+            <SelectItem value="entregue">Entregue</SelectItem>
+          </SelectContent>
+        </Select>
 
         <div className="admin-order-actions">
           {order.status !== "entregue" ? (

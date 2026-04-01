@@ -1,4 +1,5 @@
 import type { ErrosCliente } from "./tipos";
+import { Input } from "../ui/input";
 
 interface DadosClienteProps {
   nome: string;
@@ -31,12 +32,12 @@ export function DadosCliente({
             Seu nome
           </label>
           <div className="relative">
-            <input
+            <Input
               type="text"
               value={nome}
               onChange={onNomeChange}
               placeholder="Como devemos te chamar?"
-              className={`bg-dn-cream text-dn-cocoa placeholder:text-dn-mist w-full rounded-[10px] border-[1.5px] px-3.5 py-3 pl-10 text-[15px] font-semibold transition-all outline-none placeholder:font-medium ${
+              className={`bg-dn-cream text-dn-cocoa placeholder:text-dn-mist h-auto w-full rounded-[10px] border-[1.5px] px-3.5 py-3 pl-10 text-[15px] font-semibold transition-all placeholder:font-medium ${
                 erros.nome
                   ? "border-dn-rose-strong shadow-[0_0_0_3px_rgba(181,73,106,0.12)]"
                   : nome.trim().length >= 2
@@ -57,12 +58,12 @@ export function DadosCliente({
             WhatsApp
           </label>
           <div className="relative">
-            <input
+            <Input
               type="tel"
               value={whatsapp}
               onChange={onWhatsappChange}
               placeholder="(00) 00000-0000"
-              className={`bg-dn-cream text-dn-cocoa placeholder:text-dn-mist w-full rounded-[10px] border-[1.5px] px-3.5 py-3 pl-10 text-[15px] font-semibold transition-all outline-none placeholder:font-medium ${
+              className={`bg-dn-cream text-dn-cocoa placeholder:text-dn-mist h-auto w-full rounded-[10px] border-[1.5px] px-3.5 py-3 pl-10 text-[15px] font-semibold transition-all placeholder:font-medium ${
                 erros.whatsapp
                   ? "border-dn-rose-strong shadow-[0_0_0_3px_rgba(181,73,106,0.12)]"
                   : whatsapp.replace(/\\D/g, "").length === 11

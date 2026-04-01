@@ -1,4 +1,5 @@
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import { Button } from "../ui/button";
 
 interface SacolaVaziaProps {
   onVoltar: () => void;
@@ -7,7 +8,7 @@ interface SacolaVaziaProps {
 export function SacolaVazia({ onVoltar }: SacolaVaziaProps) {
   return (
     <div
-      className="relative flex min-h-screen flex-col items-center justify-center bg-dn-cream p-6"
+      className="bg-dn-cream relative flex min-h-screen flex-col items-center justify-center p-6"
       style={{ fontFamily: "Nunito, sans-serif" }}
     >
       <ShoppingBagIcon
@@ -19,13 +20,15 @@ export function SacolaVazia({ onVoltar }: SacolaVaziaProps) {
         <br />
         Volte e adicione donuts!
       </p>
-      <button
+      <Button
+        type="button"
+        variant="ghost"
         onClick={onVoltar}
         className="hover:bg-dn-caramel-dark bg-dn-caramel text-dn-caramel-deep rounded-xl px-6 py-3 font-bold transition-colors"
         style={{ fontFamily: "Fredoka, sans-serif" }}
       >
         Voltar ao cardápio
-      </button>
+      </Button>
     </div>
   );
 }

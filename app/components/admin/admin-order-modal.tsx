@@ -1,6 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 
 import type { Produto } from "../../types.index";
+import { Input } from "../ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 import type { AdminOrder, AdminOrderStatus } from "./admin-types";
 
@@ -175,7 +183,11 @@ export const AdminOrderModal = ({
               {order.code} - {order.customer}
             </p>
           </div>
-          <button type="button" className="admin-modal-close" onClick={onClose}>
+          <button
+            type="button"
+            className="admin-modal-close"
+            onClick={onClose}
+          >
             Fechar
           </button>
         </div>
@@ -220,18 +232,22 @@ export const AdminOrderModal = ({
             <div className="admin-modal-block">
               <p className="admin-modal-block-title">Mudar status</p>
               <div className="admin-modal-status-row">
-                <select
-                  className="admin-select"
+                <Select
                   value={selectedStatus}
-                  onChange={(event) =>
-                    setSelectedStatus(event.target.value as AdminOrderStatus)
+                  onValueChange={(value) =>
+                    setSelectedStatus(value as AdminOrderStatus)
                   }
                 >
-                  <option value="novo">Novo</option>
-                  <option value="preparo">Em preparo</option>
-                  <option value="pronto">Pronto</option>
-                  <option value="entregue">Entregue</option>
-                </select>
+                  <SelectTrigger className="admin-select w-40">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="novo">Novo</SelectItem>
+                    <SelectItem value="preparo">Em preparo</SelectItem>
+                    <SelectItem value="pronto">Pronto</SelectItem>
+                    <SelectItem value="entregue">Entregue</SelectItem>
+                  </SelectContent>
+                </Select>
                 <button
                   type="button"
                   className="admin-order-btn admin-order-btn--advance"
@@ -247,7 +263,7 @@ export const AdminOrderModal = ({
           <div className="admin-modal-body">
             <div className="admin-modal-block">
               <p className="admin-modal-block-title">Alterar endereco</p>
-              <input
+              <Input
                 className="admin-search"
                 value={draftAddress}
                 onChange={(event) => setDraftAddress(event.target.value)}
@@ -265,7 +281,7 @@ export const AdminOrderModal = ({
                     <small>{formatMoney(item.unitPrice)}</small>
                   </div>
                   <div className="admin-modal-edit-actions">
-                    <input
+                    <Input
                       type="number"
                       min={1}
                       value={item.quantity}
@@ -288,21 +304,25 @@ export const AdminOrderModal = ({
               ))}
 
               <div className="admin-modal-add-product">
-                <select
-                  className="admin-select"
-                  value={selectedProductId || ""}
-                  onChange={(event) =>
-                    setSelectedProductId(Number(event.target.value))
+                <Select
+                  value={selectedProductId ? String(selectedProductId) : "none"}
+                  onValueChange={(value) =>
+                    setSelectedProductId(value === "none" ? 0 : Number(value))
                   }
                 >
-                  <option value="">Selecione um produto</option>
-                  {products.map((product) => (
-                    <option key={product.id} value={product.id}>
-                      {product.nome} - {formatMoney(product.preco)}
-                    </option>
-                  ))}
-                </select>
-                <input
+                  <SelectTrigger className="admin-select w-70">
+                    <SelectValue placeholder="Selecione um produto" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="none">Selecione um produto</SelectItem>
+                    {products.map((product) => (
+                      <SelectItem key={product.id} value={String(product.id)}>
+                        {product.nome} - {formatMoney(product.preco)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Input
                   type="number"
                   min={1}
                   value={selectedProductQuantity}

@@ -5,6 +5,7 @@ import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { useEffect } from "react";
 import type { CartItem } from "../types.index";
+import { Button } from "./ui/button";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -54,21 +55,23 @@ export function SacolaDrawer({
             </h2>
             <div className="flex items-center gap-2">
               {items.length > 0 && (
-                <button
+                <Button
                   type="button"
+                  variant="ghost"
                   onClick={onClear}
                   className="text-dn-mocha hover:text-dn-cocoa cursor-pointer border-none bg-transparent text-xs font-semibold underline decoration-dotted underline-offset-2"
                 >
                   Limpar
-                </button>
+                </Button>
               )}
-              <button
+              <Button
                 type="button"
+                variant="ghost"
                 onClick={onClose}
                 className="bg-dn-cream text-dn-mocha hover:bg-dn-stone flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-none transition-colors"
               >
                 <CloseIcon className="h-4.5 w-4.5" />
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -104,7 +107,9 @@ export function SacolaDrawer({
                         {item.preco.toFixed(2).replace(".", ",")} cada
                       </div>
                       <div className="mt-2 flex items-center gap-2">
-                        <button
+                        <Button
+                          type="button"
+                          variant="ghost"
                           onClick={() =>
                             onQuantityChange(item.id, item.quantity - 1)
                           }
@@ -122,14 +127,16 @@ export function SacolaDrawer({
                           ) : (
                             <DeleteOutlineOutlinedIcon className="h-4 w-4" />
                           )}
-                        </button>
+                        </Button>
                         <div
                           className="text-dn-cocoa min-w-4.5 text-center text-base font-semibold"
                           style={{ fontFamily: "Fredoka, sans-serif" }}
                         >
                           {item.quantity}
                         </div>
-                        <button
+                        <Button
+                          type="button"
+                          variant="ghost"
                           onClick={() =>
                             onQuantityChange(item.id, item.quantity + 1)
                           }
@@ -137,7 +144,7 @@ export function SacolaDrawer({
                           title="Aumentar"
                         >
                           <AddOutlinedIcon className="h-4 w-4" />
-                        </button>
+                        </Button>
                       </div>
                     </div>
                     <div
@@ -170,13 +177,15 @@ export function SacolaDrawer({
               </div>
 
               {/* Botão Finalizar */}
-              <button
+              <Button
+                type="button"
+                variant="ghost"
                 onClick={onFinalizar}
                 className="bg-dn-caramel text-dn-caramel-deep hover:bg-dn-caramel-dark mt-4 w-full cursor-pointer rounded-[10px] border-none py-3.5 text-[17px] font-bold transition-colors"
                 style={{ fontFamily: "Fredoka, sans-serif" }}
               >
                 Finalizar pedido
-              </button>
+              </Button>
             </>
           )}
         </div>

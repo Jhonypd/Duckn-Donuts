@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import {
   adminStatusToApiStatus,
@@ -8,6 +8,14 @@ import {
   useListarPedidosQuery,
 } from "../../api/pedidosApi";
 import { useListarProdutosQuery } from "../../api/produtosApi";
+import { Input } from "../ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 import { AdminOrdersBoard } from "./admin-orders-board";
 import { AdminOrderModal } from "./admin-order-modal";
@@ -103,7 +111,6 @@ export const AdminDashboard = () => {
   const [filterStatus, setFilterStatus] = useState<AdminOrderStatus | null>(
     null,
   );
-  const [clock, setClock] = useState("--:--:--");
   const [modalMode, setModalMode] = useState<"details" | "edit">("details");
   const [activeOrderId, setActiveOrderId] = useState<number | null>(null);
 
@@ -130,22 +137,6 @@ export const AdminDashboard = () => {
     () => orders.find((item) => item.id === activeOrderId) || null,
     [activeOrderId, orders],
   );
-
-  useEffect(() => {
-    const tick = () => {
-      setClock(
-        new Date().toLocaleTimeString("pt-BR", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        }),
-      );
-    };
-
-    tick();
-    const interval = window.setInterval(tick, 1000);
-    return () => window.clearInterval(interval);
-  }, []);
 
   const activeOrders = useMemo(
     () => orders.filter((order) => order.status !== "cancelado"),
@@ -282,7 +273,6 @@ export const AdminDashboard = () => {
 
       <main className="admin-main">
         <AdminTopbar
-          clockValue={clock}
           onRefresh={() => {
             refetch();
           }}
@@ -309,38 +299,46 @@ export const AdminDashboard = () => {
           />
 
           <section className="admin-toolbar" aria-label="Filtros de pedidos">
-            <input
+            <Input
               className="admin-search"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Buscar por codigo ou cliente"
             />
 
-            <select
-              className="admin-select"
-              value={deliveryFilter}
-              onChange={(event) =>
+            <Select
+              value={deliveryFilter || "all"}
+              onValueChange={(value) =>
                 setDeliveryFilter(
-                  event.target.value as "" | "delivery" | "retirada",
+                  value === "all" ? "" : (value as "delivery" | "retirada"),
                 )
               }
             >
-              <option value="">Todos os tipos</option>
-              <option value="delivery">Entrega</option>
-              <option value="retirada">Retirada</option>
-            </select>
+              <SelectTrigger className="admin-select w-45">
+                <SelectValue placeholder="Todos os tipos" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todos os tipos</SelectItem>
+                <SelectItem value="delivery">Entrega</SelectItem>
+                <SelectItem value="retirada">Retirada</SelectItem>
+              </SelectContent>
+            </Select>
 
-            <select
-              className="admin-select"
+            <Select
               value={sortBy}
-              onChange={(event) =>
-                setSortBy(event.target.value as "newest" | "oldest" | "total")
+              onValueChange={(value) =>
+                setSortBy(value as "newest" | "oldest" | "total")
               }
             >
-              <option value="newest">Mais recentes</option>
-              <option value="oldest">Mais antigos</option>
-              <option value="total">Maior valor</option>
-            </select>
+              <SelectTrigger className="admin-select w-45">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="newest">Mais recentes</SelectItem>
+                <SelectItem value="oldest">Mais antigos</SelectItem>
+                <SelectItem value="total">Maior valor</SelectItem>
+              </SelectContent>
+            </Select>
 
             <p className="admin-filter-count">
               {filteredOrders.length} pedido

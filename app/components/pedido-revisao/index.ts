@@ -8,4 +8,4 @@ export { PedidoRevisao } from "./pedido-revisao";
 export { RodapeConfirmacao } from "./rodape-confirmacao";
 export { SacolaVazia } from "./sacola-vazia";
 export { TipoEntrega } from "./tipo-entrega";
-export type { ErrosCliente, TipoEntrega } from "./tipos";
+export type { ErrosCliente, TipoEntrega as TipoEntregaValue } from "./tipos";

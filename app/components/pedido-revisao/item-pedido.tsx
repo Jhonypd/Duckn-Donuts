@@ -2,6 +2,7 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import type { CartItem } from "../../types.index";
+import { Button } from "../ui/button";
 
 interface ItemPedidoProps {
   item: CartItem;
@@ -36,7 +37,9 @@ export function ItemPedido({
         <div className="mt-1 flex w-full items-center justify-between gap-2">
           {editavel ? (
             <div className="border-dn-cream-border bg-dn-mist flex items-center gap-1 rounded-full border px-0.5 py-0.5">
-              <button
+              <Button
+                type="button"
+                variant="ghost"
                 onClick={() => onQuantidade(item.id, item.quantity - 1)}
                 className="bg-dn-cream border-dn-cream-border text-dn-caramel-deep flex h-5.5 w-5.5 cursor-pointer items-center justify-center rounded-full border-none transition-all active:scale-90"
                 aria-label="Diminuir quantidade"
@@ -46,20 +49,22 @@ export function ItemPedido({
                 ) : (
                   <DeleteIcon className="h-3.5! w-3.5! text-red-500" />
                 )}
-              </button>
+              </Button>
               <span
                 className="text-dn-caramel-deep min-w-4 text-center text-sm font-semibold"
                 style={{ fontFamily: "Fredoka, sans-serif" }}
               >
                 {item.quantity}
               </span>
-              <button
+              <Button
+                type="button"
+                variant="ghost"
                 onClick={() => onQuantidade(item.id, item.quantity + 1)}
                 className="bg-dn-caramel text-dn-caramel-deep flex h-5.5 w-5.5 cursor-pointer items-center justify-center rounded-full border-none transition-all active:scale-90"
                 aria-label="Aumentar quantidade"
               >
                 <AddOutlinedIcon className="h-3.5! w-3.5!" />
-              </button>
+              </Button>
             </div>
           ) : (
             <span className="text-dn-mocha text-[11px] font-semibold">

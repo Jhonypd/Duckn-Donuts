@@ -12,7 +12,7 @@ export function CartFooter({
   if (totalItems === 0) return null;
 
   return (
-    <div className="bg-dn-cocoa hover:bg-dn-cocoa-dark pointer-events-auto fixed right-0 bottom-0 left-0 z-200 mx-auto flex w-full cursor-pointer items-center justify-between gap-3 border-none px-4 py-3.5 pt-2.5 pb-4 shadow-[0_-4px_24px_rgba(59,42,20,0.14)] transition-all duration-150 hover:translate-y-px">
+    <div className="bg-dn-cocoa pointer-events-auto fixed right-0 bottom-0 left-0 z-200 mx-auto flex w-full items-center justify-between gap-3 border-none px-4 py-3.5 pt-2.5 pb-4 shadow-[0_-4px_24px_rgba(59,42,20,0.14)]">
       <div className="flex flex-col items-start gap-2 text-left">
         <p className="text-[10px]">Total sem a entrega</p>
         <p
@@ -27,8 +27,9 @@ export function CartFooter({
         </p>
       </div>
       <button
+        type="button"
         onClick={onViewCart}
-        className="bg-dn-caramel hover:bg-dn-caramel-dark pointer-events-auto cursor-pointer items-center justify-between rounded-2xl border-none px-4.5 py-2 transition-all duration-150 hover:translate-y-px"
+        className="bg-dn-caramel hover:bg-dn-caramel-dark pointer-events-auto cursor-pointer items-center justify-between rounded-2xl border-none px-4.5 py-2 transition-colors duration-150"
       >
         <div
           className="text-base font-semibold text-white"

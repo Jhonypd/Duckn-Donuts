@@ -1,4 +1,11 @@
 import type { ProdutoDisplay } from "../types.index";
+import { Button } from "./ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "./ui/dialog";
 
 interface ImageModalProps {
   product: ProdutoDisplay | null;
@@ -6,63 +13,43 @@ interface ImageModalProps {
 }
 
 export function ModalImagem({ product, onClose }: ImageModalProps) {
-  if (!product) return null;
-
   const imageSrc =
-    product.image ||
+    product?.image ||
     "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&q=80";
 
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
   return (
-    <div
-      className="not-even:pop fixed inset-0 z-500 flex items-center justify-center bg-[rgba(30,18,6,0.72)] p-6 backdrop-blur-sm"
-      onClick={handleBackdropClick}
-    >
-      <div
-        className="w-full max-w-95 animate-[popIn_0.22s_cubic-bezier(0.34,1.56,0.64,1)] overflow-hidden rounded-2xl bg-white"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Imagem */}
+    <Dialog open={Boolean(product)} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="overflow-hidden p-0">
         <img
           src={imageSrc}
-          alt={product.nome}
+          alt={product?.nome ?? "Produto"}
           className="bg-dn-cream h-60 w-full object-cover"
         />
-
-        {/* Informações */}
-        <div className="p-4 px-4.5 pb-5">
-          <h2
-            className="text-dn-cocoa mb-1.5 text-[22px] font-bold"
+        <DialogHeader className="px-4.5 pt-4 pb-0">
+          <DialogTitle
+            className="text-[22px] font-bold"
             style={{ fontFamily: "Fredoka, sans-serif" }}
           >
-            {product.nome}
-          </h2>
-          <p className="text-dn-mocha mb-3.5 text-[13px] leading-relaxed">
-            {product.descricao || "Sem descrição disponível"}
+            {product?.nome}
+          </DialogTitle>
+          <p className="text-dn-mocha text-[13px] leading-relaxed">
+            {product?.descricao || "Sem descrição disponível"}
           </p>
+        </DialogHeader>
+        <div className="px-4.5 pb-5 pt-3">
           <div className="flex items-center justify-center">
-            <button
+            <Button
+              type="button"
+              variant="ghost"
               onClick={onClose}
               className="bg-dn-cream text-dn-mocha hover:bg-dn-stone cursor-pointer rounded-lg border-none px-4 py-2 text-[13px] font-bold transition-colors"
               style={{ fontFamily: "Nunito, sans-serif" }}
             >
               Fechar
-            </button>
+            </Button>
           </div>
         </div>
-      </div>
-
-      <style>{`
-        @keyframes popIn {
-          from { transform: scale(0.88); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
-        }
-      `}</style>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

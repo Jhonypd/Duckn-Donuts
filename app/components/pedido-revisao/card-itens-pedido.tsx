@@ -1,6 +1,7 @@
 import type { CartItem } from "../../types.index";
 import { ItemPedido } from "./item-pedido";
 import { ResumoPedido } from "./resumo-pedido";
+import { Button } from "../ui/button";
 
 interface CardItensPedidoProps {
   itens: CartItem[];
@@ -37,12 +38,14 @@ export function CardItensPedido({
           </span>
         </div>
         {mostrarEditar && (
-          <button
+          <Button
+            type="button"
+            variant="ghost"
             onClick={onEditar}
             className="bg-dn-cream-border text-dn-cocoa hover:bg-dn-cream-border cursor-pointer rounded-md border-none px-2.5 py-1 text-xs font-bold transition-colors"
           >
             Editar
-          </button>
+          </Button>
         )}
       </div>
 

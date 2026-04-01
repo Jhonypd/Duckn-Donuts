@@ -1,11 +1,9 @@
 type AdminTopbarProps = {
-  clockValue: string;
   onRefresh: () => void;
   refreshing?: boolean;
 };
 
 export const AdminTopbar = ({
-  clockValue,
   onRefresh,
   refreshing = false,
 }: AdminTopbarProps) => {
@@ -13,12 +11,10 @@ export const AdminTopbar = ({
     <header className="admin-topbar">
       <div>
         <p className="admin-topbar-title">Gestao de pedidos</p>
-        <p className="admin-topbar-subtitle">Acompanhamento em tempo real</p>
+        <p className="admin-topbar-subtitle">Painel administrativo</p>
       </div>
 
       <div className="admin-topbar-right">
-        <span className="admin-live-pill">Ao vivo</span>
-        <span className="admin-clock">{clockValue}</span>
         <button
           type="button"
           className="admin-primary-btn"
